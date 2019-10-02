@@ -15,5 +15,6 @@ export class HooksModule implements OnModuleInit {
   async onModuleInit() {
     const { hookActions } = this.hooksExplorer.explore();
     this.hooksService.register(hookActions);
+    console.log('init');
   }
 }

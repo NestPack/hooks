@@ -1,7 +1,7 @@
 import { TestingModule, Test } from '@nestjs/testing';
 import { HooksModule } from '../hooks.module';
 import { IHookAction } from '../interfaces';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import { HooksService } from '../hooks.service';
 import { HookAction } from '../hook-action.decorator';
 jest.setTimeout(20000);
@@ -223,5 +223,46 @@ describe('hooks', () => {
 
     expect(result[0].value).toBe('global 2');
     expect(result[1].value).toBe('global 4');
+  });
+
+  it.only('should allow cross module hooks', async () => {
+    class Hook {}
+
+    @HookAction(Hook)
+    class Action implements IHookAction {
+      handle(hook) {
+        return 'works';
+      }
+    }
+
+    @Injectable()
+    class Service {
+      constructor(private readonly hooksService: HooksService) {}
+      run() {
+        return this.hooksService.runHook(new Hook());
+      }
+    }
+
+    @Module({
+      imports: [HooksModule],
+      providers: [Service],
+    })
+    class ModuleOne {}
+
+    @Module({
+      imports: [HooksModule, ModuleOne],
+      providers: [Action],
+    })
+    class ModuleTwo {}
+
+    const module = await Test.createTestingModule({
+      imports: [ModuleOne, ModuleTwo],
+      providers: [],
+    }).compile();
+    const app = await module.init();
+    const service = app.get<Service>(Service);
+    const result = await service.run();
+
+    expect(result).toBe('works');
   });
 });
