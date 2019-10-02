@@ -1,6 +1,6 @@
 {
   "name": "@nestpack/hooks",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Hooks Module for NestJs project",
   "author": "Harry Horton",
   "license": "MIT",
