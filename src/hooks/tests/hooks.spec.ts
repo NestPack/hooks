@@ -225,7 +225,7 @@ describe('hooks', () => {
     expect(result[1].value).toBe('global 4');
   });
 
-  it.only('should allow cross module hooks', async () => {
+  it('should allow cross module hooks', async () => {
     class Hook {}
 
     @HookAction(Hook)
