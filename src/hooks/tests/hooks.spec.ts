@@ -89,7 +89,7 @@ describe('hooks', () => {
     @HookAction(Hook)
     class DoubleAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 10));
+        await new Promise((r) => setTimeout(r, 10));
         hook.value = hook.value * 2;
       }
     }
@@ -97,7 +97,7 @@ describe('hooks', () => {
     @HookAction(Hook)
     class ToStringAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 5));
+        await new Promise((r) => setTimeout(r, 5));
         hook.value = hook.value.toString();
       }
     }
@@ -133,7 +133,7 @@ describe('hooks', () => {
     @HookAction(Hook, HookTwo)
     class DoubleAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 10));
+        await new Promise((r) => setTimeout(r, 10));
         hook.value = hook.value * 2;
       }
     }
@@ -141,7 +141,7 @@ describe('hooks', () => {
     @HookAction(Hook)
     class ToStringAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 5));
+        await new Promise((r) => setTimeout(r, 5));
         hook.value = hook.value.toString();
       }
     }
@@ -181,7 +181,7 @@ describe('hooks', () => {
     @HookAction(Hook, HookTwo)
     class DoubleAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 10));
+        await new Promise((r) => setTimeout(r, 10));
         hook.value = hook.value * 2;
       }
     }
@@ -189,7 +189,7 @@ describe('hooks', () => {
     @HookAction(Hook)
     class ToStringAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 5));
+        await new Promise((r) => setTimeout(r, 5));
         hook.value = hook.value.toString();
       }
     }
@@ -197,7 +197,7 @@ describe('hooks', () => {
     @HookAction()
     class GlobalAction implements IHookAction {
       async handle(hook) {
-        await new Promise(r => setTimeout(r, 5));
+        await new Promise((r) => setTimeout(r, 5));
         hook.value = `global ${hook.value}`;
       }
     }
